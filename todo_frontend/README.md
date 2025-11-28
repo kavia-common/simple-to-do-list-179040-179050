@@ -27,6 +27,21 @@ Launches the test runner in interactive watch mode.
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+## Backend Integration
+
+- The frontend will automatically resolve the backend API base URL in this order:
+  1. `REACT_APP_API_URL` environment variable (recommended for deployments).
+  2. Same host as the frontend with port `3001` (useful in preview environments).
+  3. Fallback to `http://localhost:3001`.
+
+- To set the backend URL explicitly, create a `.env` file in this folder:
+  ```
+  REACT_APP_API_URL=https://your-backend-host:3001
+  ```
+  Do not commit secrets. This variable is read at build time.
+
+- CORS: The backend enables permissive CORS (allow-origins "*", all methods/headers), so CRUD operations work across origins.
+
 ## Customization
 
 ### Colors

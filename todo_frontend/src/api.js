@@ -1,4 +1,23 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+const API_BASE_URL = (() => {
+  // Prefer explicit env var when provided
+  const envUrl = process.env.REACT_APP_API_URL && String(process.env.REACT_APP_API_URL).trim();
+  if (envUrl) return envUrl;
+
+  // If running in a browser, try to infer same-host backend on 3001
+  if (typeof window !== 'undefined' && window.location && window.location.origin) {
+    try {
+      const url = new URL(window.location.origin);
+      // Use same protocol/host but backend port 3001
+      url.port = '3001';
+      return url.toString().replace(/\/$/, '');
+    } catch {
+      // fall through to localhost fallback
+    }
+  }
+
+  // Fallback to localhost:3001 (backend preview default)
+  return 'http://localhost:3001';
+})();
 
 /**
  * Helper to handle JSON responses and errors.
