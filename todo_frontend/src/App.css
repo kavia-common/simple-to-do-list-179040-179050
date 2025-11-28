@@ -1,104 +1,273 @@
-/* CSS Variables for Theme Management */
+/* Neon Cyber Theme Variables */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #10B981; /* Emerald */
+  --secondary: #F59E0B; /* Amber */
+  --success: #10B981;
+  --error: #EF4444;
+  --bg: #0b0f14;
+  --surface: #0f1620;
+  --surface-2: #121a25;
+  --text: #E5E7EB;
+  --muted: #9CA3AF;
+  --border: rgba(255, 255, 255, 0.08);
+  --glow: 0 0 18px rgba(16, 185, 129, 0.35);
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+[data-theme="light"] {
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --surface-2: #f3f4f6;
+  --text: #111827;
+  --muted: #6B7280;
+  --border: rgba(0, 0, 0, 0.08);
+  --glow: 0 0 0 rgba(0,0,0,0);
 }
 
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Layout */
 .App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: var(--bg-secondary);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* Navbar */
+.cyber-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--surface), var(--surface-2));
+}
+
+.cyber-navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cyber-navbar .logo {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
-}
-
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
-}
-
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
-  border: none;
+  border: 2px solid var(--primary);
+  color: var(--primary);
   border-radius: 8px;
-  padding: 10px 20px;
+  box-shadow: var(--glow);
+  font-weight: 900;
+}
+.cyber-navbar .title {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  font-size: 18px;
+}
+
+.cyber-navbar .controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.api-hint {
+  color: var(--muted);
+  font-size: 12px;
+  border: 1px dashed var(--border);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+/* Main container */
+.container {
+  width: 100%;
+  max-width: 880px;
+  margin: 24px auto;
+  padding: 0 16px 48px;
+  flex: 1;
+}
+
+/* Composer */
+.composer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--glow);
+}
+.composer-form {
+  display: flex;
+  gap: 12px;
+}
+.todo-input {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+.todo-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+
+.todo-input.edit {
+  width: 100%;
+}
+
+.meta {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
   font-size: 14px;
-  font-weight: 600;
+}
+.badge {
+  background: rgba(16,185,129,0.12);
+  color: var(--success);
+  border: 1px solid rgba(16,185,129,0.35);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.loading { color: var(--secondary); }
+.error { color: var(--error); }
+
+/* Buttons */
+.btn {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.06s ease, box-shadow 0.2s ease, border 0.2s ease, background 0.2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn.primary {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.95), rgba(16, 185, 129, 0.85));
+  border-color: rgba(16,185,129,0.65);
+  color: #022217;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(16,185,129,0.25);
+}
+.btn.secondary {
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.95), rgba(245, 158, 11, 0.85));
+  border-color: rgba(245, 158, 11, 0.65);
+  color: #2d1900;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(245,158,11,0.25);
+}
+.btn.danger {
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.95), rgba(239, 68, 68, 0.85));
+  border-color: rgba(239, 68, 68, 0.65);
+  color: #2b0a0a;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(239,68,68,0.25);
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+/* List */
+.list {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+/* Todo Card */
+.todo-card {
+  display: grid;
+  grid-template-columns: 42px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.todo-card.completed {
+  background: linear-gradient(180deg, rgba(16,185,129,0.08), var(--surface));
+  border-color: rgba(16,185,129,0.35);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.toggle {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  background: var(--surface-2);
+  color: var(--surface-2);
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.toggle.on {
+  border-color: var(--success);
+  background: rgba(16,185,129,0.2);
+  color: #063f2e;
+  box-shadow: var(--glow);
+}
+
+.todo-title {
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text);
+}
+.todo-card.completed .todo-title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Empty state */
+.empty {
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  background: var(--surface);
+}
+.empty-icon { font-size: 24px; }
+.empty-text { margin-top: 8px; }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  padding: 12px 24px;
+  text-align: center;
+}
+.footer .accent {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .todo-card {
+    grid-template-columns: 36px 1fr;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
+  .actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
   }
 }

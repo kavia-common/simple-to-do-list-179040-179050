@@ -1,7 +1,8 @@
 {
-  "name": "react-kavia",
+  "name": "neon-cyber-todo",
   "version": "0.1.0",
   "private": true,
+  "description": "Neon Cyber themed React todo app (add, edit, delete, toggle) integrated with FastAPI backend",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -10,7 +11,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -30,5 +31,6 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
